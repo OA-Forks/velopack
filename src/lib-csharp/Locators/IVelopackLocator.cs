@@ -39,10 +39,16 @@ namespace Velopack.Locators
 
         /// <summary> The release channel this package was built for. </summary>
         string? Channel { get; }
-        
+
+        /// <summary> Set of channels this package was built for . </summary>
+        IEnumerable<string>? Channels { get; }
+
+        /// <summary> Flag indicates this package built for multiple release channels. </summary>
+        bool IsMultichannel { get; }
+
         /// <summary> The logging interface to use for Velopack diagnostic messages. </summary>
         IVelopackLogger Log { get; }
-        
+
         /// <summary>
         /// A flag indicating if this is a portable build, and that the settings should be self-contained in the package.
         /// On Windows, this is true for portable builds, and false for non-portable builds which were installed by Setup.exe
@@ -50,12 +56,12 @@ namespace Velopack.Locators
         /// home directory.
         /// </summary>
         bool IsPortable { get; }
-        
+
         /// <summary>
         /// The process for which the Velopack Locator has been constructed. This should usually be the current process path.
         /// </summary>
         string ProcessExePath { get; }
-        
+
         /// <summary>
         /// The process ID for which the Velopack Locator has been constructed. This should usually be the current process ID.
         /// Setting this to zero will disable some features of Velopack (like the ability to wait for the process to exit

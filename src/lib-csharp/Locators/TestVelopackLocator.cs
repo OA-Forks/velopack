@@ -1,4 +1,5 @@
-using System;
+﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using NuGet.Versioning;
 using Velopack.Logging;
@@ -80,6 +81,8 @@ namespace Velopack.Locators
                 return _channel;
             }
         }
+
+        public override IEnumerable<string>? Channels { get; }
 
         public override IVelopackLogger Log { get; }
 

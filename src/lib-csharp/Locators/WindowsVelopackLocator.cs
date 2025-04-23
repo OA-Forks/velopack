@@ -1,4 +1,5 @@
-using System;
+﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Runtime.Versioning;
@@ -41,6 +42,9 @@ namespace Velopack.Locators
 
         /// <inheritdoc />
         public override string? Channel { get; }
+
+        /// <inheritdoc />
+        public override IEnumerable<string>? Channels { get; }
 
         /// <inheritdoc />
         public override uint ProcessId { get; }
@@ -89,6 +93,7 @@ namespace Velopack.Locators
                     UpdateExePath = possibleUpdateExe;
                     AppContentDir = myDirPath;
                     Channel = manifest.Channel;
+                    Channels = manifest.Channels;
                 } else if (PathUtil.PathPartStartsWith(myDirName, "app-") && NuGetVersion.TryParse(myDirName.Substring(4), out var version)) {
                     // this is a legacy case, where we're running in an 'root/app-*/' directory, and there is no manifest.
                     initLog.Warn(
@@ -117,6 +122,7 @@ namespace Velopack.Locators
                     CurrentlyInstalledVersion = manifest.Version;
                     AppContentDir = currentDir;
                     Channel = manifest.Channel;
+                    Channels = manifest.Channels;
                 }
             }
 

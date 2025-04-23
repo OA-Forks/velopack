@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
@@ -59,11 +59,14 @@ namespace Velopack
         /// <summary> The channel to use when searching for packages. </summary>
         protected string Channel { get; }
 
-        /// <summary> The default channel to search for packages in, if one was not provided by the user. </summary>
-        protected string DefaultChannel => Locator?.Channel ?? VelopackRuntimeInfo.SystemOs.GetOsShortName();
+        /// <summary> 
+        /// The default channel to search for packages in, if one was not provided by the user.
+        /// If package has multichannel support, default channel will be first of available channels.
+        /// </summary>
+        protected string DefaultChannel => (Locator?.IsMultichannel ?? false) ? Locator.Channels!.First() : Locator?.Channel ?? VelopackRuntimeInfo.SystemOs.GetOsShortName();
 
         /// <summary> If true, an explicit channel was provided by the user, and it's different than the default channel. </summary>
-        protected bool IsNonDefaultChannel => Locator?.Channel != null && Channel != DefaultChannel;
+        protected bool IsNonDefaultChannel => (Locator?.Channel != null || Locator?.Channels != null) && Channel != DefaultChannel;
 
         /// <summary> If true, UpdateManager should return the latest asset in the feed, even if that version is lower than the current version. </summary>
         protected bool ShouldAllowVersionDowngrade { get; }

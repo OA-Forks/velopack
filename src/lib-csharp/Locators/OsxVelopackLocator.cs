@@ -1,4 +1,5 @@
-using System;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Versioning;
 using NuGet.Versioning;
@@ -47,6 +48,9 @@ namespace Velopack.Locators
 
         /// <inheritdoc />
         public override string? Channel { get; }
+
+        /// <inheritdoc />
+        public override IEnumerable<string>? Channels { get; }
 
         /// <inheritdoc />
         public override uint ProcessId { get; }

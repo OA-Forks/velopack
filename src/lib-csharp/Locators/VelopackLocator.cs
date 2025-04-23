@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -15,7 +15,7 @@ namespace Velopack.Locators
     public abstract class VelopackLocator : IVelopackLocator
     {
         private static IVelopackLocator? _current;
-        
+
         /// <summary>
         /// The default log file name for Velopack.
         /// </summary>
@@ -90,6 +90,10 @@ namespace Velopack.Locators
 
         /// <inheritdoc/>
         public abstract string? Channel { get; }
+
+        public abstract IEnumerable<string>? Channels { get; }
+
+        public bool IsMultichannel => Channel == null && Channels != null && Channels.Count() > 1;
 
         /// <inheritdoc/>
         public abstract IVelopackLogger Log { get; }
