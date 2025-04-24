@@ -91,8 +91,10 @@ namespace Velopack.Locators
         /// <inheritdoc/>
         public abstract string? Channel { get; }
 
+        /// <inheritdoc/>
         public abstract IEnumerable<string>? Channels { get; }
 
+        /// <inheritdoc/>
         public bool IsMultichannel => Channel == null && Channels != null && Channels.Count() > 1;
 
         /// <inheritdoc/>

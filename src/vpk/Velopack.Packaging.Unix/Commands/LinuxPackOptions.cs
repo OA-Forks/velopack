@@ -28,6 +28,8 @@ public class LinuxPackOptions : IPackOptions
 
     public string Channel { get; set; }
 
+    public string Channels { get; set; }
+
     public string Exclude { get; set; }
 
     public bool NoPortable { get; set; }

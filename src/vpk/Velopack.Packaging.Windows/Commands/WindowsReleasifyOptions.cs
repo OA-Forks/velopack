@@ -18,5 +18,7 @@ public class WindowsReleasifyOptions : WindowsSigningOptions
 
     public string Channel { get; set; }
 
+    public string Channels { get; set; }
+
     public bool SkipVelopackAppCheck { get; set; }
 }

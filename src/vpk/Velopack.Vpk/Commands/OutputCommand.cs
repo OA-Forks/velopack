@@ -9,9 +9,13 @@ public abstract class OutputCommand : BaseCommand
 
     public string Channel { get; private set; }
 
+    public string Channels { get; private set; }
+
     protected CliOption<DirectoryInfo> ReleaseDirectoryOption { get; private set; }
 
     protected CliOption<string> ChannelOption { get; private set; }
+
+    protected CliOption<string> ChannelsOptions { get; private set; }
 
     protected OutputCommand(string name, string description, RuntimeOs targetOs = RuntimeOs.Unknown)
         : base(name, description)
@@ -26,6 +30,11 @@ public abstract class OutputCommand : BaseCommand
             .RequiresValidNuGetId()
             .SetArgumentHelpName("NAME")
             .SetDefault(DefaultName.GetDefaultChannel(targetOs == RuntimeOs.Unknown ? VelopackRuntimeInfo.SystemOs : targetOs));
+
+        //TODO: add validation
+        ChannelOption = AddOption<string>((v) => Channels = v, "--channels")
+            .SetDescription("The set of channels to use for this release.")
+            .SetArgumentHelpName("NAME");
     }
 
     public DirectoryInfo GetReleaseDirectory()
